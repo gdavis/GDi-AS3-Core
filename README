@@ -1,0 +1,45 @@
+-BaseController - abstract class for controlling other objects
+  -LocationController - controller for a particular location. uses one or many viewcontrollers to display information. controls view controller's transition in and out.
+  -ViewController - controller of a view and displaying its contents
+-View - abstract class for displaying content
+-Model - abstract class for storing and retrieving application data
+
+
+NavigationManager - Presents LocationControllers when changing sections. Persists LocationManagers throughout application lifecycle.
+LocationManager - tracks the location of the user. provides access to the history, and next/prev sections
+
+
+LocationManager
+ |
+ | 1. parses the navigation JSON
+ | 2. creates LocationControllers with parsed data
+ | 3. activates the current location controller
+ | 4. takes commands to change sections
+ | 5. performs deactivation of previous location and activates the next. repeat 4.
+ |
+ LocationController
+  |
+  | // view creation:
+  | 1. viewcontroller.loadView()
+  | 2. viewcontroller.viewWillAppear()
+  | 3. viewcontroller.animateIn()
+  | 4. (viewcontroller responds to locationcontroller via delegate method when finished)
+  | 5. viewcontroller.viewDidAppear()
+  |
+  ViewController
+   |
+   View 
+
+
+Navigation JSON
+
+{
+  locations: [
+    {
+      name: "Homepage"
+      controller: "HomepageLocationController"
+      url: "/home"
+    },
+  ]
+  
+}
